@@ -25,7 +25,7 @@ extension on WidgetTester {
 void main() {
   final mockPosts = List.generate(
     5,
-    (i) => Post(id: i, title: 'post title', body: 'post body'),
+    (i) => Post(id: i, title: 'post title', body: 'post body', userId: 1),
   );
 
   late PostBloc postBloc;
@@ -87,7 +87,8 @@ void main() {
           status: PostStatus.success,
           posts: List.generate(
             10,
-            (i) => Post(id: i, title: 'post title', body: 'post body'),
+            (i) =>
+                Post(id: i, title: 'post title', body: 'post body', userId: 1),
           ),
         ),
       );

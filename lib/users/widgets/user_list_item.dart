@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/posts/posts.dart';
+import 'package:ticketing_system/users/users.dart';
 
-class PostListItem extends StatelessWidget {
-  const PostListItem({super.key, required this.post});
+class UserListItem extends StatelessWidget {
+  const UserListItem({super.key, required this.user});
 
-  final Post post;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,10 @@ class PostListItem extends StatelessWidget {
           child: ListTile(
         leading: ClipOval(
             child: Image.network(
-                'https://randomuser.me/api/portraits/women/${post.userId}.jpg')),
-        title: Text(post.title),
+                'https://randomuser.me/api/portraits/women/${user.id}.jpg')),
+        title: Text(user.name),
         isThreeLine: true,
-        subtitle: Text(post.body),
+        subtitle: Text(user.email),
         dense: true,
       )),
     );

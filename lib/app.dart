@@ -4,9 +4,8 @@ import 'package:ticketing_system/dashboard_page.dart';
 import 'package:ticketing_system/section/section_bloc.dart';
 import 'package:ticketing_system/section/section_repository.dart';
 
-import 'package:ticketing_system/splash/splash_page.dart';
-
 import 'package:ticketing_system/posts/posts.dart';
+import 'package:ticketing_system/users/users.dart';
 
 class App extends StatelessWidget {
   const App({super.key, required SectionRepository sectionRepository})
@@ -55,6 +54,10 @@ class _AppViewState extends State<AppView> {
                 );
                 break;
               case AppSectionStatus.users:
+                _navigator.pushAndRemoveUntil<void>(
+                  UsersPage.route(),
+                  (route) => false,
+                );
                 break;
               case AppSectionStatus.posts:
                 _navigator.pushAndRemoveUntil<void>(

@@ -17,9 +17,16 @@ Uri _postsUrl({required int start}) {
 
 void main() {
   group('PostBloc', () {
-    const mockPosts = [Post(id: 1, title: 'post title', body: 'post body')];
+    const mockPosts = [
+      Post(
+        id: 1,
+        title: 'post title',
+        body: 'post body',
+        userId: 1,
+      )
+    ];
     const extraMockPosts = [
-      Post(id: 2, title: 'post title', body: 'post body')
+      Post(id: 2, title: 'post title', body: 'post body', userId: 1)
     ];
 
     late http.Client httpClient;

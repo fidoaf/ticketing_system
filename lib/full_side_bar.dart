@@ -1,14 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 ///
 /// Complete side menu:
 /// - Current session information => Logged user.
 ///
 class FullSideBar extends StatelessWidget {
-  static final int _userCount = 10;
+  static const int _userCount = 10;
   static final int _randomUserId = Random().nextInt(_userCount + 1);
 
   const FullSideBar({super.key});
