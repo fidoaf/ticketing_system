@@ -4,6 +4,7 @@ import 'package:ticketing_system/dashboard_item.dart';
 import 'package:ticketing_system/full_side_bar.dart';
 import 'package:ticketing_system/posts/posts.dart';
 import 'package:ticketing_system/section/section_bloc.dart';
+import 'package:ticketing_system/tasks/tasks.dart';
 import 'package:ticketing_system/users/users.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -37,7 +38,12 @@ class DashboardPage extends StatelessWidget {
                   handler: () {
                     Navigator.of(context).push(PostsPage.route());
                   }),
-              DashboardItem(label: 'Tasks', icon: Icons.task, handler: () {}),
+              DashboardItem(
+                  label: 'Tasks',
+                  icon: Icons.task,
+                  handler: () {
+                    Navigator.of(context).push(TasksPage.route());
+                  }),
             ],
           )),
         );

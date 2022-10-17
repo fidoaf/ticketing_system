@@ -5,6 +5,7 @@ import 'package:ticketing_system/section/section_bloc.dart';
 import 'package:ticketing_system/section/section_repository.dart';
 
 import 'package:ticketing_system/posts/posts.dart';
+import 'package:ticketing_system/tasks/tasks.dart';
 import 'package:ticketing_system/users/users.dart';
 
 class App extends StatelessWidget {
@@ -62,6 +63,12 @@ class _AppViewState extends State<AppView> {
               case AppSectionStatus.posts:
                 _navigator.pushAndRemoveUntil<void>(
                   PostsPage.route(),
+                  (route) => false,
+                );
+                break;
+              case AppSectionStatus.tasks:
+                _navigator.pushAndRemoveUntil<void>(
+                  TasksPage.route(),
                   (route) => false,
                 );
                 break;

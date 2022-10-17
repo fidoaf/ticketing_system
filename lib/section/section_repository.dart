@@ -1,6 +1,6 @@
 import 'dart:async';
 
-enum AppSectionStatus { home, users, posts }
+enum AppSectionStatus { home, users, posts, tasks }
 
 class SectionRepository {
   final _controller = StreamController<AppSectionStatus>();
