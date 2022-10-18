@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ticketing_system/posts/posts.dart';
+import 'package:ticketing_system/comments/comments.dart';
 
-class PostsList extends StatefulWidget {
-  const PostsList({super.key});
+class CommentsList extends StatefulWidget {
+  const CommentsList({super.key});
 
   @override
-  State<PostsList> createState() => _PostsListState();
+  State<CommentsList> createState() => _CommentsListState();
 }
 
-class _PostsListState extends State<PostsList> {
+class _CommentsListState extends State<CommentsList> {
   final _scrollController = ScrollController();
 
   @override
@@ -20,27 +20,27 @@ class _PostsListState extends State<PostsList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostBloc, PostState>(
+    return BlocBuilder<CommentBloc, CommentState>(
       builder: (context, state) {
         switch (state.status) {
-          case PostStatus.failure:
-            return const Center(child: Text('failed to fetch posts'));
-          case PostStatus.success:
-            if (state.posts.isEmpty) {
-              return const Center(child: Text('no posts'));
+          case CommentStatus.failure:
+            return const Center(child: Text('failed to fetch comments'));
+          case CommentStatus.success:
+            if (state.comments.isEmpty) {
+              return const Center(child: Text('no comments'));
             }
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return index >= state.posts.length
+                return index >= state.comments.length
                     ? const BottomLoader()
-                    : PostListItem(post: state.posts[index]);
+                    : CommentListItem(comment: state.comments[index]);
               },
               itemCount: state.hasReachedMax
-                  ? state.posts.length
-                  : state.posts.length + 1,
+                  ? state.comments.length
+                  : state.comments.length + 1,
               controller: _scrollController,
             );
-          case PostStatus.initial:
+          case CommentStatus.initial:
             return const Center(child: CircularProgressIndicator());
         }
       },
@@ -56,7 +56,7 @@ class _PostsListState extends State<PostsList> {
   }
 
   void _onScroll() {
-    if (_isBottom) context.read<PostBloc>().add(PostFetched());
+    if (_isBottom) context.read<CommentBloc>().add(CommentFetched());
   }
 
   bool get _isBottom {

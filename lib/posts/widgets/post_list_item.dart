@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ticketing_system/comments/comments.dart';
 import 'package:ticketing_system/posts/posts.dart';
 
 class PostListItem extends StatelessWidget {
@@ -13,12 +14,7 @@ class PostListItem extends StatelessWidget {
         onTap: () {},
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-                //TODO:
-                MaterialPageRoute<void>(
-                    builder: (_) => Scaffold(
-                          appBar: AppBar(),
-                        )));
+            Navigator.of(context).push(CommentsPage.route(post.id));
           },
           child: Card(
               child: ListTile(

@@ -25,8 +25,8 @@ class TasksListItem extends StatelessWidget {
                 tooltip: task.completed ? 'Tak completed' : 'Assign task',
                 onPressed: () {},
                 icon: task.completed
-                    ? Icon(Icons.check)
-                    : Icon(Icons.assignment_ind))
+                    ? const Icon(Icons.check)
+                    : const Icon(Icons.assignment_ind))
           ],
         ),
         dense: true,

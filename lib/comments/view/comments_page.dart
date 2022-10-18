@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ticketing_system/posts/posts.dart';
+import 'package:ticketing_system/comments/comments.dart';
 import 'package:http/http.dart' as http;
 
-class PostsPage extends StatelessWidget {
-  const PostsPage({super.key});
+class CommentsPage extends StatelessWidget {
+  const CommentsPage({super.key, required this.postId});
 
-  static Route<void> route() {
-    return MaterialPageRoute<void>(builder: (_) => const PostsPage());
+  final int postId;
+
+  static Route<void> route(int postId) {
+    return MaterialPageRoute<void>(
+        builder: (_) => CommentsPage(
+              postId: postId,
+            ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Posts')),
+      appBar: AppBar(title: const Text('Comments')),
       body: BlocProvider(
-        create: (_) => PostBloc(httpClient: http.Client())..add(PostFetched()),
-        child: const PostsList(),
+        create: (_) => CommentBloc(postId: postId, httpClient: http.Client())
+          ..add(CommentFetched()),
+        child: const CommentsList(),
       ),
     );
   }

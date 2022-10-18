@@ -73,7 +73,6 @@ class _AppViewState extends State<AppView> {
                 );
                 break;
               case AppSectionStatus.comments:
-                child = Scaffold();
                 break;
             }
           },
