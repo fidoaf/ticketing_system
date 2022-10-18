@@ -23,14 +23,8 @@ class FullSideBar extends StatelessWidget {
             accountName: const Text('Jane Smith'),
             accountEmail: const Text('j.smith@work.com'),
             currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                child: Image.network(
-                  'https://randomuser.me/api/portraits/women/$_randomUserId.jpg',
-                  fit: BoxFit.cover,
-                  width: 90,
-                  height: 90,
-                ),
-              ),
+              backgroundImage: NetworkImage(
+                  'https://randomuser.me/api/portraits/women/$_randomUserId.jpg'),
             ),
             decoration: const BoxDecoration(
               color: Colors.blue,

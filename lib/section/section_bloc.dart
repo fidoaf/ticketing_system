@@ -35,6 +35,10 @@ class SectionBloc extends Bloc<SectionEvent, SectionState> {
         return emit(const SectionState.users());
       case AppSectionStatus.posts:
         return emit(const SectionState.posts());
+      case AppSectionStatus.tasks:
+        return emit(const SectionState.tasks());
+      case AppSectionStatus.comments:
+        return emit(const SectionState.comments());
     }
   }
 }

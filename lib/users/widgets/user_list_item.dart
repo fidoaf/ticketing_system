@@ -13,9 +13,10 @@ class UserListItem extends StatelessWidget {
       onTap: () {},
       child: Card(
           child: ListTile(
-        leading: ClipOval(
-            child: Image.network(
-                'https://randomuser.me/api/portraits/women/${user.id}.jpg')),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(
+              'https://randomuser.me/api/portraits/women/${user.id}.jpg'),
+        ),
         title: Text(user.name),
         isThreeLine: true,
         subtitle: Text(user.email),

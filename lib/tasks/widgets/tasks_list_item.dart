@@ -13,9 +13,10 @@ class TasksListItem extends StatelessWidget {
       onTap: () {},
       child: Card(
           child: ListTile(
-        leading: ClipOval(
-            child: Image.network(
-                'https://randomuser.me/api/portraits/women/${task.userId}.jpg')),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(
+              'https://randomuser.me/api/portraits/women/${task.userId}.jpg'),
+        ),
         title: Text(task.title),
         isThreeLine: true,
         subtitle: ButtonBar(
