@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketing_system/posts/posts.dart';
 
+import 'package:ticketing_system/common/widgets/bottom_loader.dart';
+
 class PostsList extends StatefulWidget {
   const PostsList({super.key});
 
