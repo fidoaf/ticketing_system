@@ -23,13 +23,17 @@ class DashboardItem extends StatelessWidget {
                 alignment: Alignment.center,
                 decoration:
                     BoxDecoration(border: Border.all(color: Colors.black)),
-                constraints:
-                    const BoxConstraints(minHeight: 100, maxWidth: 100),
+                constraints: const BoxConstraints(minHeight: 100),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(icon),
-                    Text(label),
+                    Icon(
+                      icon,
+                    ),
+                    Text(
+                      label,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ],
                 ))));
   }

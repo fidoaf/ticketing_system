@@ -22,9 +22,15 @@ class PostListItem extends StatelessWidget {
               backgroundImage: NetworkImage(
                   'https://randomuser.me/api/portraits/women/${post.userId}.jpg'),
             ),
-            title: Text(post.title),
+            title: RichText(
+                text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    children: <TextSpan>[TextSpan(text: post.title)])),
             isThreeLine: true,
-            subtitle: Text(post.body),
+            subtitle: RichText(
+                text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    children: <TextSpan>[TextSpan(text: post.body)])),
             dense: true,
           )),
         ));

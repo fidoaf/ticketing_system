@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ticketing_system/dashboard_page.dart';
+import 'package:ticketing_system/onboarding_page.dart';
 import 'package:ticketing_system/section/section_bloc.dart';
 import 'package:ticketing_system/section/section_repository.dart';
 
@@ -43,7 +45,7 @@ class _AppViewState extends State<AppView> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: _navigatorKey,
-      home: const DashboardPage(),
+      home: OnBoardingPage(),
       builder: (context, child) {
         return BlocListener<SectionBloc, SectionState>(
           listener: (context, state) {

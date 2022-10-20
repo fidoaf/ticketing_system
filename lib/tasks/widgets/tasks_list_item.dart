@@ -17,7 +17,7 @@ class TasksListItem extends StatelessWidget {
           backgroundImage: NetworkImage(
               'https://randomuser.me/api/portraits/women/${task.userId}.jpg'),
         ),
-        title: Text(task.title),
+        title: SelectableText(task.title),
         isThreeLine: true,
         subtitle: ButtonBar(
           children: [

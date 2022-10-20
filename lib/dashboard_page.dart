@@ -17,36 +17,55 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SectionBloc, SectionState>(
+      buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(),
-          drawer: const FullSideBar(),
-          body: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DashboardItem(
-                label: 'Users',
-                icon: Icons.people,
-                handler: () {
-                  Navigator.of(context).push(UsersPage.route());
-                },
-              ),
-              DashboardItem(
-                  label: 'Forum',
-                  icon: Icons.chat,
-                  handler: () {
-                    Navigator.of(context).push(PostsPage.route());
-                  }),
-              DashboardItem(
-                  label: 'Tasks',
-                  icon: Icons.task,
-                  handler: () {
-                    Navigator.of(context).push(TasksPage.route());
-                  }),
-            ],
-          )),
-        );
+            appBar: AppBar(),
+            drawer: const FullSideBar(),
+            body: Column(
+              // TODO: change the flex value of each item depending on the focused element
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.grey.shade50,
+                    child: DashboardItem(
+                      label: 'Users',
+                      icon: Icons.people,
+                      handler: () {
+                        Navigator.of(context).push(UsersPage.route());
+                      },
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.grey.shade200,
+                    child: DashboardItem(
+                      label: 'Forum',
+                      icon: Icons.chat,
+                      handler: () {
+                        Navigator.of(context).push(PostsPage.route());
+                      },
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    color: Colors.grey.shade50,
+                    child: DashboardItem(
+                      label: 'Tasks',
+                      icon: Icons.task,
+                      handler: () {
+                        Navigator.of(context).push(TasksPage.route());
+                      },
+                    ),
+                  ),
+                )
+              ],
+            ));
       },
     );
   }
