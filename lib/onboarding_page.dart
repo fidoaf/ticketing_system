@@ -5,11 +5,13 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:ticketing_system/dashboard_page.dart';
 
 class OnBoardingPage extends StatefulWidget {
+  const OnBoardingPage({super.key});
+
   @override
-  _OnBoardingPageState createState() => _OnBoardingPageState();
+  OnBoardingPageState createState() => OnBoardingPageState();
 }
 
-class _OnBoardingPageState extends State<OnBoardingPage> {
+class OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
@@ -18,6 +20,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     );
   }
 
+  // ignore: unused_element
   Widget _buildFullscreenImage() {
     return Image.asset(
       'assets/fullscreen.jpg',
