@@ -1,25 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:equatable/equatable.dart';
-import 'package:ticketing_system/users/users.dart';
 import 'package:http/http.dart' as http;
-import 'package:stream_transform/stream_transform.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
+
+import 'package:ticketing_system/users/users.dart';
 import 'package:ticketing_system/users/models/models.dart';
+import 'package:ticketing_system/common/bloc/event_transformer.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
 
 const _userLimit = 20;
 const throttleDuration = Duration(milliseconds: 100);
-
-EventTransformer<E> throttleDroppable<E>(Duration duration) {
-  return (events, mapper) {
-    return droppable<E>().call(events.throttle(duration), mapper);
-  };
-}
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({required this.httpClient}) : super(const UserState()) {

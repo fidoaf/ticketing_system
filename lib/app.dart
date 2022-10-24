@@ -45,7 +45,7 @@ class _AppViewState extends State<AppView> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: _navigatorKey,
-      home: OnBoardingPage(),
+      home: const OnBoardingPage(),
       builder: (context, child) {
         return BlocListener<SectionBloc, SectionState>(
           listener: (context, state) {

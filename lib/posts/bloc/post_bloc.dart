@@ -1,24 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
-import 'package:equatable/equatable.dart';
-import 'package:ticketing_system/posts/posts.dart';
 import 'package:http/http.dart' as http;
-import 'package:stream_transform/stream_transform.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
+
+import 'package:ticketing_system/posts/posts.dart';
+import 'package:ticketing_system/posts/models/models.dart';
+import 'package:ticketing_system/common/bloc/event_transformer.dart';
 
 part 'post_event.dart';
 part 'post_state.dart';
 
 const _postLimit = 20;
 const throttleDuration = Duration(milliseconds: 100);
-
-EventTransformer<E> throttleDroppable<E>(Duration duration) {
-  return (events, mapper) {
-    return droppable<E>().call(events.throttle(duration), mapper);
-  };
-}
 
 class PostBloc extends Bloc<PostEvent, PostState> {
   PostBloc({required this.httpClient}) : super(const PostState()) {
