@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketing_system/dashboard_item.dart';
 import 'package:ticketing_system/full_side_bar.dart';
 import 'package:ticketing_system/posts/posts.dart';
-import 'package:ticketing_system/section/section_bloc.dart';
-import 'package:ticketing_system/section/section_repository.dart';
 import 'package:ticketing_system/tasks/tasks.dart';
 import 'package:ticketing_system/users/users.dart';
 
@@ -15,17 +12,17 @@ class DashboardPage extends StatelessWidget {
     return MaterialPageRoute<void>(builder: (_) => const DashboardPage());
   }
 
-  double _getSectionHeight(BuildContext context, SectionState currentState,
-      AppSectionStatus section) {
-    double totalHeight = MediaQuery.of(context).size.height;
-    double appBarHeight = Scaffold.of(context).appBarMaxHeight ?? 0;
-    if (currentState.focusedSection == AppSectionStatus.home) {
-      // All sections equally sized
-      return (totalHeight - (appBarHeight)) / 3;
-    } else {
-      return (totalHeight - (appBarHeight)) / 4;
-    }
-  }
+  // double _getSectionHeight(BuildContext context, SectionState currentState,
+  //     AppSectionStatus section) {
+  //   double totalHeight = MediaQuery.of(context).size.height;
+  //   double appBarHeight = Scaffold.of(context).appBarMaxHeight ?? 0;
+  //   if (currentState.focusedSection == AppSectionStatus.home) {
+  //     // All sections equally sized
+  //     return (totalHeight - (appBarHeight)) / 3;
+  //   } else {
+  //     return (totalHeight - (appBarHeight)) / 4;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -33,59 +30,52 @@ class DashboardPage extends StatelessWidget {
         appBar: AppBar(),
         drawer: const FullSideBar(),
         body: SingleChildScrollView(
-            child: BlocBuilder<SectionBloc, SectionState>(
-          buildWhen: (previous, current) => previous.status != current.status,
-          builder: (context, state) {
-            return Column(
-              children: [
-                MouseRegion(
-                    cursor: SystemMouseCursors.click,
-                    onEnter: (_) {
-                      //context.read<SectionBloc>().add(const SectionFocusChanged());
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      height: _getSectionHeight(
-                          context, state, AppSectionStatus.users),
-                      color: Colors.grey.shade50,
-                      child: DashboardItem(
-                        label: 'Users',
-                        icon: Icons.people,
-                        handler: () {
-                          Navigator.of(context).push(UsersPage.route());
-                        },
-                      ),
-                    )),
-                AnimatedContainer(
-                  duration: const Duration(seconds: 1),
-                  height:
-                      _getSectionHeight(context, state, AppSectionStatus.posts),
-                  color: Colors.grey.shade200,
-                  child: DashboardItem(
-                    label: 'Forum',
-                    icon: Icons.chat,
-                    handler: () {
-                      Navigator.of(context).push(PostsPage.route());
-                    },
-                  ),
+          child: Column(
+            children: [
+              MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_) {
+                    //context.read<SectionBloc>().add(const SectionFocusChanged());
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(seconds: 1),
+                    height: 300,
+                    color: Colors.grey.shade50,
+                    child: DashboardItem(
+                      label: 'Users',
+                      icon: Icons.people,
+                      handler: () {
+                        Navigator.of(context).push(UsersPage.route());
+                      },
+                    ),
+                  )),
+              AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                height: 300,
+                color: Colors.grey.shade200,
+                child: DashboardItem(
+                  label: 'Forum',
+                  icon: Icons.chat,
+                  handler: () {
+                    Navigator.of(context).push(PostsPage.route());
+                  },
                 ),
-                AnimatedContainer(
-                  duration: const Duration(seconds: 1),
-                  height:
-                      _getSectionHeight(context, state, AppSectionStatus.tasks),
-                  color: Colors.grey.shade50,
-                  child: DashboardItem(
-                    label: 'Tasks',
-                    icon: Icons.task,
-                    handler: () {
-                      Navigator.of(context).push(TasksPage.route());
-                    },
-                  ),
+              ),
+              AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                height: 300,
+                color: Colors.grey.shade50,
+                child: DashboardItem(
+                  label: 'Tasks',
+                  icon: Icons.task,
+                  handler: () {
+                    Navigator.of(context).push(TasksPage.route());
+                  },
                 ),
-              ],
-            );
-          },
-        )));
+              ),
+            ],
+          ),
+        ));
   }
 }
 
