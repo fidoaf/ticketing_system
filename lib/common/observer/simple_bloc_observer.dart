@@ -2,7 +2,7 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SimpleBlocObserver extends BlocObserver {
+class GlobalBlocObserver extends BlocObserver {
   @override
   void onTransition(
     Bloc<dynamic, dynamic> bloc,
