@@ -15,3 +15,12 @@ class SectionChanged extends SectionEvent {
   @override
   List<Object?> get props => [status];
 }
+
+class SectionFocusChanged extends SectionEvent {
+  const SectionFocusChanged(this.status);
+
+  final AppSectionStatus status;
+
+  @override
+  List<Object?> get props => [status];
+}

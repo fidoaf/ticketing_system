@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 import 'package:ticketing_system/users/users.dart';
-import 'package:http/http.dart' as http;
 
 class UsersPage extends StatelessWidget {
   const UsersPage({super.key});
@@ -15,7 +15,9 @@ class UsersPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Users')),
       body: BlocProvider(
-        create: (_) => UserBloc(httpClient: http.Client())..add(UserFetched()),
+        create: (_) =>
+            UserBloc(dataRepository: context.read<PlaceholderDataAPI>())
+              ..add(UserFetched()),
         child: const UsersList(),
       ),
     );

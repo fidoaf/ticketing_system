@@ -1,29 +1,27 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:ticketing_system/tasks/tasks.dart';
-import 'package:ticketing_system/tasks/models/models.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 import 'package:ticketing_system/common/bloc/event_transformer.dart';
 
 part 'task_event.dart';
 part 'task_state.dart';
 
-const _taskLimit = 20;
 const throttleDuration = Duration(milliseconds: 100);
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
-  TaskBloc({required this.httpClient}) : super(const TaskState()) {
+  TaskBloc({required PlaceholderDataAPI dataRepository})
+      : _dataRepository = dataRepository,
+        super(const TaskState()) {
     on<TaskFetched>(
       _onTaskFetched,
       transformer: throttleDroppable(throttleDuration),
     );
   }
 
-  final http.Client httpClient;
+  final PlaceholderDataAPI _dataRepository;
 
   Future<void> _onTaskFetched(
     TaskFetched event,
@@ -32,7 +30,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     if (state.hasReachedMax) return;
     try {
       if (state.status == TaskStatus.initial) {
-        final tasks = await _fetchTasks();
+        final tasks = await _dataRepository.fetchTasks();
         return emit(
           state.copyWith(
             status: TaskStatus.success,
@@ -41,7 +39,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           ),
         );
       }
-      final tasks = await _fetchTasks(state.tasks.length);
+      final tasks = await _dataRepository.fetchTasks(state.tasks.length);
       tasks.isEmpty
           ? emit(state.copyWith(hasReachedMax: true))
           : emit(
@@ -54,29 +52,5 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     } catch (_) {
       emit(state.copyWith(status: TaskStatus.failure));
     }
-  }
-
-  Future<List<Task>> _fetchTasks([int startIndex = 0]) async {
-    final response = await httpClient.get(
-      Uri.https(
-        'jsonplaceholder.typicode.com',
-        '/todos',
-        <String, String>{'_start': '$startIndex', '_limit': '$_taskLimit'},
-      ),
-    );
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body) as List;
-      return body.map((dynamic json) {
-        final map = json as Map<String, dynamic>;
-        return Task(
-          id: map['id'] as int,
-          title: map['title'] as String,
-          completed: map['completed'] as bool,
-          userId: map['userId'] as int,
-        );
-      }).toList()
-        ..shuffle();
-    }
-    throw Exception('error fetching tasks');
   }
 }

@@ -1,9 +1,12 @@
 part of 'section_bloc.dart';
 
 class SectionState extends Equatable {
-  const SectionState._({this.status = AppSectionStatus.home});
+  const SectionState._(
+      {this.status = AppSectionStatus.home,
+      this.focusedSection = AppSectionStatus.home});
 
   final AppSectionStatus status;
+  final AppSectionStatus focusedSection;
 
   const SectionState.home() : this._(status: AppSectionStatus.home);
   const SectionState.users() : this._(status: AppSectionStatus.users);

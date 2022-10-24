@@ -1,29 +1,27 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:ticketing_system/users/users.dart';
-import 'package:ticketing_system/users/models/models.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 import 'package:ticketing_system/common/bloc/event_transformer.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
 
-const _userLimit = 20;
 const throttleDuration = Duration(milliseconds: 100);
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  UserBloc({required this.httpClient}) : super(const UserState()) {
+  UserBloc({required PlaceholderDataAPI dataRepository})
+      : _dataRepository = dataRepository,
+        super(const UserState()) {
     on<UserFetched>(
       _onUserFetched,
       transformer: throttleDroppable(throttleDuration),
     );
   }
 
-  final http.Client httpClient;
+  final PlaceholderDataAPI _dataRepository;
 
   Future<void> _onUserFetched(
     UserFetched event,
@@ -32,7 +30,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (state.hasReachedMax) return;
     try {
       if (state.status == UserStatus.initial) {
-        final users = await _fetchUsers();
+        final users = await _dataRepository.fetchUsers();
         return emit(
           state.copyWith(
             status: UserStatus.success,
@@ -41,7 +39,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           ),
         );
       }
-      final users = await _fetchUsers(state.users.length);
+      final users = await _dataRepository.fetchUsers(state.users.length);
       users.isEmpty
           ? emit(state.copyWith(hasReachedMax: true))
           : emit(
@@ -54,29 +52,5 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     } catch (_) {
       emit(state.copyWith(status: UserStatus.failure));
     }
-  }
-
-  Future<List<User>> _fetchUsers([int startIndex = 0]) async {
-    final response = await httpClient.get(
-      Uri.https(
-        'jsonplaceholder.typicode.com',
-        '/users',
-        <String, String>{'_start': '$startIndex', '_limit': '$_userLimit'},
-      ),
-    );
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body) as List;
-      return body.map((dynamic json) {
-        final map = json as Map<String, dynamic>;
-        return User(
-          id: map['id'] as int,
-          name: map['name'] as String,
-          username: map['username'] as String,
-          email: map['email'] as String,
-        );
-      }).toList()
-        ..shuffle();
-    }
-    throw Exception('error fetching users');
   }
 }

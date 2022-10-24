@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/users/users.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 
 class UserListItem extends StatelessWidget {
   const UserListItem({super.key, required this.user});

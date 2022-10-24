@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
-  const User(
-      {required this.id,
-      required this.name,
-      required this.username,
-      required this.email});
+  const User({
+    required this.id,
+    required this.name,
+    required this.username,
+    required this.email,
+  });
 
   final int id;
   final String name;

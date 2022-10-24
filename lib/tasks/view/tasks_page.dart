@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 import 'package:ticketing_system/tasks/tasks.dart';
-import 'package:http/http.dart' as http;
 
 class TasksPage extends StatelessWidget {
   const TasksPage({super.key});
@@ -15,7 +15,9 @@ class TasksPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Tasks')),
       body: BlocProvider(
-        create: (_) => TaskBloc(httpClient: http.Client())..add(TaskFetched()),
+        create: (_) =>
+            TaskBloc(dataRepository: context.read<PlaceholderDataAPI>())
+              ..add(TaskFetched()),
         child: const TaskList(),
       ),
     );

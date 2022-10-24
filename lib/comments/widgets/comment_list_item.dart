@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/comments/comments.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 
 class CommentListItem extends StatelessWidget {
   const CommentListItem({super.key, required this.comment});

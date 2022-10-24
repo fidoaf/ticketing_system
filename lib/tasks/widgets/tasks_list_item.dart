@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/tasks/tasks.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 
 class TasksListItem extends StatelessWidget {
   const TasksListItem({super.key, required this.task});
@@ -22,11 +22,15 @@ class TasksListItem extends StatelessWidget {
         subtitle: ButtonBar(
           children: [
             IconButton(
-                tooltip: task.completed ? 'Tak completed' : 'Assign task',
-                onPressed: () {},
-                icon: task.completed
-                    ? const Icon(Icons.check)
-                    : const Icon(Icons.assignment_ind))
+              tooltip: task.completed ? 'Tak completed' : 'Assign task',
+              onPressed: () {},
+              icon: task.completed
+                  ? const Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    )
+                  : const Icon(Icons.assignment_ind),
+            )
           ],
         ),
         dense: true,

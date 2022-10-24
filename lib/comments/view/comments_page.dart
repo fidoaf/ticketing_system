@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 import 'package:ticketing_system/comments/comments.dart';
-import 'package:http/http.dart' as http;
 
 class CommentsPage extends StatelessWidget {
   const CommentsPage({super.key, required this.postId});
@@ -20,7 +20,8 @@ class CommentsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Comments')),
       body: BlocProvider(
-        create: (_) => CommentBloc(postId: postId, httpClient: http.Client())
+        create: (_) => CommentBloc(
+            postId: postId, dataRepository: context.read<PlaceholderDataAPI>())
           ..add(CommentFetched()),
         child: const CommentsList(),
       ),

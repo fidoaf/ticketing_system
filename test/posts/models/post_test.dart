@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:ticketing_system/posts/models/models.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

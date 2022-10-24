@@ -35,8 +35,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
-  http: ^0.13.0
   stream_transform: ^2.0.0
+
+  placeholder_data:
+    path: packages/placeholder_data
+  json_placeholder_api:
+    path: packages/json_placeholder_api
 
 dev_dependencies:
   bloc_test: ^9.0.0

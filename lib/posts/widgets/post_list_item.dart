@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticketing_system/comments/comments.dart';
-import 'package:ticketing_system/posts/posts.dart';
+import 'package:placeholder_data/placeholder_data.dart';
 
 class PostListItem extends StatelessWidget {
   const PostListItem({super.key, required this.post});
