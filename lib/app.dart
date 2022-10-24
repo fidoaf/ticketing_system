@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:placeholder_data/placeholder_data.dart';
 
-import 'package:ticketing_system/onboarding_page.dart';
+import 'package:ticketing_system/common/widgets/onboarding_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key, required PlaceholderDataAPI dataRepository})
