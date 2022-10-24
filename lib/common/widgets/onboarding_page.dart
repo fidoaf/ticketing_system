@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:ticketing_system/dashboard_page.dart';
+import 'package:ticketing_system/dashboard/widgets/dashboard_page.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/dashboard_item.dart';
+import 'package:ticketing_system/dashboard/widgets/dashboard_item.dart';
 import 'package:ticketing_system/common/widgets/full_side_bar.dart';
 import 'package:ticketing_system/posts/posts.dart';
 import 'package:ticketing_system/tasks/tasks.dart';
