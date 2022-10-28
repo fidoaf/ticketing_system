@@ -37,6 +37,8 @@ dependencies:
   flutter_bloc: ^8.1.1
   stream_transform: ^2.0.0
 
+  font_awesome_flutter: ^10.2.1
+
   placeholder_data:
     path: packages/placeholder_data
   json_placeholder_api:

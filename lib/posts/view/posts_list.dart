@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketing_system/posts/posts.dart';
 
 class PostsList extends StatefulWidget {
-  const PostsList({super.key});
+  const PostsList({super.key, int? userId}) : _userId = userId ?? -1;
+
+  final int _userId;
 
   @override
   State<PostsList> createState() => _PostsListState();
@@ -56,7 +58,11 @@ class _PostsListState extends State<PostsList> {
   }
 
   void _onScroll() {
-    if (_isBottom) context.read<PostBloc>().add(PostFetched());
+    if (_isBottom) {
+      context.read<PostBloc>().add(widget._userId == -1
+          ? PostFetched()
+          : PostByUserFetched(widget._userId));
+    }
   }
 
   bool get _isBottom {

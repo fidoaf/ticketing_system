@@ -15,7 +15,9 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(), drawer: const FullSideBar(), body: DashboardList());
+        appBar: AppBar(),
+        drawer: const FullSideBar(),
+        body: const DashboardList());
   }
 }
 

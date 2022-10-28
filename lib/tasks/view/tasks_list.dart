@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketing_system/tasks/tasks.dart';
 
 class TaskList extends StatefulWidget {
-  const TaskList({super.key});
+  const TaskList({super.key, int? userId}) : _userId = userId ?? -1;
+
+  final int _userId;
 
   @override
   State<TaskList> createState() => _TaskListState();
@@ -56,7 +58,11 @@ class _TaskListState extends State<TaskList> {
   }
 
   void _onScroll() {
-    if (_isBottom) context.read<TaskBloc>().add(TaskFetched());
+    if (_isBottom) {
+      context.read<TaskBloc>().add(widget._userId == -1
+          ? TaskFetched()
+          : TaskByUserFetched(widget._userId));
+    }
   }
 
   bool get _isBottom {

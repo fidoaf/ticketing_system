@@ -11,12 +11,18 @@ part 'task_state.dart';
 
 const throttleDuration = Duration(milliseconds: 100);
 
+// TODO: Refactor methods
+
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc({required PlaceholderDataAPI dataRepository})
       : _dataRepository = dataRepository,
         super(const TaskState()) {
     on<TaskFetched>(
       _onTaskFetched,
+      transformer: throttleDroppable(throttleDuration),
+    );
+    on<TaskByUserFetched>(
+      _onTaskByUserFetched,
       transformer: throttleDroppable(throttleDuration),
     );
   }
@@ -40,6 +46,38 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         );
       }
       final tasks = await _dataRepository.fetchTasks(state.tasks.length);
+      tasks.isEmpty
+          ? emit(state.copyWith(hasReachedMax: true))
+          : emit(
+              state.copyWith(
+                status: TaskStatus.success,
+                tasks: List.of(state.tasks)..addAll(tasks),
+                hasReachedMax: false,
+              ),
+            );
+    } catch (_) {
+      emit(state.copyWith(status: TaskStatus.failure));
+    }
+  }
+
+  Future<void> _onTaskByUserFetched(
+    TaskByUserFetched event,
+    Emitter<TaskState> emit,
+  ) async {
+    if (state.hasReachedMax) return;
+    try {
+      if (state.status == TaskStatus.initial) {
+        final tasks = await _dataRepository.fetchUserTasks(event.userId);
+        return emit(
+          state.copyWith(
+            status: TaskStatus.success,
+            tasks: tasks,
+            hasReachedMax: false,
+          ),
+        );
+      }
+      final tasks = await _dataRepository.fetchUserTasks(
+          event.userId, state.tasks.length);
       tasks.isEmpty
           ? emit(state.copyWith(hasReachedMax: true))
           : emit(
